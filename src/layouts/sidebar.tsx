@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed }) => {
     {
       key: '/dashboard',
       icon: <UserOutlined />,
-      label: 'ໜ້າຫຼັກ',
+      label: 'ໜ້າຫຼັກs',
       permission: 'view-home',
     },
     {
