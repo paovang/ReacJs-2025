@@ -42,5 +42,5 @@ html, body {
 }
 
 :where(.css-1d4w9r2).ant-layout-sider {
-  min-height: 100vh !important;
+  background-color: white !important;
 }
