@@ -22,17 +22,13 @@ html, body {
 .ant-layout-content {
   font-family: 'Noto Sans Lao', sans-serif;
 }
+
 :where(.css-dev-only-do-not-override-1d4w9r2).ant-menu-light .ant-menu-item-selected, :where(.css-dev-only-do-not-override-1d4w9r2).ant-menu-light>.ant-menu .ant-menu-item-selected {
   border-radius: 0;
   border-right: 3px solid #1890ff;
   width: 98%;
 }
 
-:where(.css-1d4w9r2).ant-menu-light .ant-menu-item-selected, :where(.css-1d4w9r2).ant-menu-light>.ant-menu .ant-menu-item-selected {
-  border-radius: 0;
-  border-right: 3px solid #1890ff;
-  width: 98%;
-}
 .ant-menu-item-active {
   background: none !important;
   color:#1890ff !important;
@@ -47,7 +43,13 @@ html, body {
 }
 
 
-/* for netify */
+/* css for netify */
 :where(.css-1d4w9r2).ant-layout-sider {
   background-color: white !important;
+}
+
+:where(.css-1d4w9r2).ant-menu-light .ant-menu-item-selected, :where(.css-1d4w9r2).ant-menu-light>.ant-menu .ant-menu-item-selected {
+  border-radius: 0;
+  border-right: 3px solid #1890ff;
+  width: 98%;
 }
