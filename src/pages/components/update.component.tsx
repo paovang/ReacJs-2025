@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { AppDispatch, RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser, fetchUser, updateUser } from "../../reducers/userSlice";
 import { IUser } from "../../interfaces/user.interface";
+import { Button } from "antd";
 
 const FormUpdateUser = () => {
     const [userData, setUserData] = useState<IUser>({
@@ -12,6 +13,7 @@ const FormUpdateUser = () => {
         phone_number: ''
     })
     const currentUser = useSelector<RootState, IUser>((state) => state.user?.currentUser as IUser);
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const { id } = useParams<{ id: string }>()
 
@@ -33,12 +35,18 @@ const FormUpdateUser = () => {
     }
 
     const handleUpdate = async () => {
+        setLoading(true)
         if (id) {
             await dispatch(updateUser(userData))
         } else {
             await dispatch(createUser(userData))
         }
+        setLoading(false)
+        navigate('/list/users')
     }
+
+    const navigate = useNavigate();
+    
     
     return (
         <div className="container mx-auto p-4">
@@ -66,9 +74,14 @@ const FormUpdateUser = () => {
                 placeholder="please enter phone number..."
                 className="mb-2 w-full rounded border p-2"
             />
-            <button  className={`mr-2 rounded px-3 py-1 text-lime-50 ${id ? 'bg-yellow-500' : 'bg-green-500'}`} onClick={handleUpdate}>
+            <Button 
+                color="pink"
+                variant="solid"
+                onClick={handleUpdate}
+                loading={loading} 
+            >
                 {id ? 'Update User' : 'Create User'}
-            </button>
+            </Button>
         </div>
     )
 }

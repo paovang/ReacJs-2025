@@ -4,16 +4,14 @@ import {
   PayloadAction,
   SerializedError,
 } from "@reduxjs/toolkit";
-import axios from "axios";
 import { IUser, IUserState } from "../interfaces/user.interface";
-
-const apiUrl = "https://67e656b06530dbd3110f8cd8.mockapi.io/pao/users";
+import axios from "../configuration/axios.config";
 
 export const fetchUsers = createAsyncThunk<
   IUser[],
   { page: number; limit: number }
 >("user/fetchUsers", async ({ page, limit }) => {
-  const response = await axios.get(apiUrl, {
+  const response = await axios.get("users", {
     params: {
       page,
       limit,
@@ -25,7 +23,7 @@ export const fetchUsers = createAsyncThunk<
 export const fetchUser = createAsyncThunk<IUser, number>(
   "user/fetchUser",
   async (id: number) => {
-    const response = await axios.get(`${apiUrl}/${id}`);
+    const response = await axios.get(`${"users"}/${id}`);
     return response.data;
   }
 );
@@ -33,7 +31,7 @@ export const fetchUser = createAsyncThunk<IUser, number>(
 export const createUser = createAsyncThunk<IUser, IUser>(
   "user/createUser",
   async (user: IUser) => {
-    const response = await axios.post(apiUrl, user);
+    const response = await axios.post("users", user);
     return response.data;
   }
 );
@@ -41,7 +39,7 @@ export const createUser = createAsyncThunk<IUser, IUser>(
 export const updateUser = createAsyncThunk<IUser, IUser>(
   "user/updateUser",
   async (user: IUser) => {
-    const response = await axios.put(`${apiUrl}/${user.id}`, user);
+    const response = await axios.put(`${"users"}/${user.id}`, user);
     return response.data;
   }
 );
@@ -49,7 +47,7 @@ export const updateUser = createAsyncThunk<IUser, IUser>(
 export const deleteUser = createAsyncThunk<IUser, number>(
   "user/deleteUser",
   async (userId: number) => {
-    const response = await axios.delete(`${apiUrl}/${userId}`);
+    const response = await axios.delete(`${"users"}/${userId}`);
     return response.data;
   }
 );
@@ -76,7 +74,10 @@ const userSlice = createSlice({
   reducers: {
     updatePagination: (
       state,
-      action: PayloadAction<{ currentPage: number; pageSize: number }>
+      action: PayloadAction<{
+        currentPage: number;
+        pageSize: number;
+      }>
     ) => {
       state.pagination.currentPage = action.payload.currentPage;
       state.pagination.pageSize = action.payload.pageSize;
@@ -98,7 +99,7 @@ const userSlice = createSlice({
           state.loading = false;
           if (action.type.includes("user/fetchUsers")) {
             state.users = action.payload as IUser[];
-            state.pagination.total = 24;
+            state.pagination.total = 20;
           }
           if (action.type.includes("user/fetchUser")) {
             state.currentUser = action.payload as IUser;
@@ -122,12 +123,11 @@ const userSlice = createSlice({
         }
       )
       .addMatcher(
-        (action) => action.type.includes("/rejected"),
+        (action): action is { error: SerializedError } =>
+          action.type.includes("/rejected"),
         (state, action) => {
           state.loading = false;
-          const errorMessage =
-            (action.error as SerializedError)?.message ?? "An error occurred";
-          state.error = errorMessage;
+          state.error = action.error?.message ?? "An error occurred";
         }
       );
   },

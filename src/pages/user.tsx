@@ -27,7 +27,7 @@ const UserLists = () => {
 
     useEffect(() => {
         dispatch(fetchUsers({ page: pagination.currentPage, limit: pagination.pageSize }));
-    }, [dispatch, pagination]);
+    }, [dispatch, pagination.currentPage, pagination.pageSize]);
     
     const columns: ColumnsType<DataType> = [
         {
@@ -78,8 +78,10 @@ const UserLists = () => {
         const page = pagination.current ?? 1; 
         const limit = pagination.pageSize ?? 10;
 
-        dispatch(updatePagination({ currentPage: page, pageSize: limit }));
-        dispatch(fetchUsers({ page, limit }));
+        dispatch(updatePagination({ 
+            currentPage: page, 
+            pageSize: limit
+        }));
     }
 
     const navigate = useNavigate();
@@ -94,13 +96,11 @@ const UserLists = () => {
     return (
         <div className="container mx-auto p-4">
             <div className="flex justify-between items-center">
-                <h3 className="text-lg font-semibold">ລາຍການ ຜູ້ໃຊ້ລະບົບ</h3>
+                <h3 className="text-lg font-semibold">ລາຍການ ຜູ້ໃຊ້ລະບົບ {error}</h3>
                 {users.length > 0 && toggleButton}
             </div>
 
             <Divider/>
-            {loading && <p>Loading...</p>}
-            {error && <p>Erro: {error}</p>}
             <Table<DataType>
                 columns={columns} 
                 dataSource={users} 

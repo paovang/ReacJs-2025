@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 
 interface RoleGuardProps {
   allowedRoles: string[];
-  children: React.ReactNode; // เพิ่ม children prop เพื่อรองรับ component ที่จะถูก render
+  children: React.ReactNode;
 }
 
 const roleGuard = ({ allowedRoles, children }: RoleGuardProps) => {

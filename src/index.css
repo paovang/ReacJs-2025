@@ -12,71 +12,31 @@ html, body {
   font-family: 'Noto Sans Lao', sans-serif;
 }
 
-/* :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:where(.css-dev-only-do-not-override-1d4w9r2).ant-layout-sider {
+  background: rgb(253, 252, 252) !important;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+.ant-menu {
+  font-family: 'Noto Sans Lao', sans-serif;
 }
-a:hover {
-  color: #535bf2;
+.ant-layout-content {
+  font-family: 'Noto Sans Lao', sans-serif;
 }
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+:where(.css-dev-only-do-not-override-1d4w9r2).ant-menu-light .ant-menu-item-selected, :where(.css-dev-only-do-not-override-1d4w9r2).ant-menu-light>.ant-menu .ant-menu-item-selected {
+  border-radius: 0;
+  border-right: 3px solid #1890ff;
+  width: 98%;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.ant-menu-item-active {
+  background: none !important;
+  color:#1890ff !important;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.ant-menu-item-selected {
+  background-color: #e6f7ff !important;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
+.colors {
+  color:#1890ff !important;
+}
